@@ -22,6 +22,8 @@
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
     "less": "^3.10.3",
+    "reqwest": "^2.0.5",
+    "vue-infinite-scroll": "^2.0.2",
     "vue-template-compiler": "^2.6.10"
   },
   "eslintConfig": {
