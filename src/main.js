@@ -1,12 +1,13 @@
 import Vue from 'vue'
 import App from './App.vue'
 import {
+    Anchor,
     Badge,
     Button,
     Card,
     Col, Comment, Divider, Dropdown,
     Icon, Input, Layout, List, LocaleProvider,
-    Menu, Modal, Popover, Row, Select, Tooltip, Upload
+    Menu, Modal, Popover, Row, Select, Timeline, Tooltip, Upload
 } from 'ant-design-vue';
 import TextArea from "ant-design-vue/lib/input/TextArea";
 Vue.use(Layout);
@@ -29,6 +30,8 @@ Vue.use(Upload);
 Vue.use(Popover);
 Vue.use(Badge);
 Vue.use(Dropdown);
+Vue.use(Timeline);
+Vue.use(Anchor);
 
 
 Vue.config.productionTip = false

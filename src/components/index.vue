@@ -1,5 +1,5 @@
 <template>
-    <a-layout id="components-layout-demo-top" >
+    <a-layout id="components-layout-top" >
         <a-layout-header :style="{ position: 'fixed', zIndex: 1, width: '100%' }">
             <a-row>
                 <a-col :span="21">
@@ -14,27 +14,24 @@
                     </a-tooltip>
                     <a-divider type="vertical" :style="{ fontSize: '22px', color: '#08c' }"/>
                     <!-- 通知 -->
-                    <a-popover placement="bottom">
+                    <a-popover placement="bottom" >
                         <template slot="content">
                             <div
-                                    class="demo-infinite-container"
+                                    class="infinite-container"
                                     v-infinite-scroll="handleInfiniteOnLoad"
                                     :infinite-scroll-disabled="busy"
                                     :infinite-scroll-distance="10"
+                                    bordered="false"
                             >
                                 <!-- 通知列表 -->
                                 <a-list :dataSource="data">
                                     <a-list-item slot="renderItem" slot-scope="item">
                                         <a-list-item-meta :description="item.email">
                                             <a slot="title" :href="item.href">{{item.name.last}}</a>
-                                            <a-avatar
-                                                    slot="avatar"
-                                                    src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-                                            />
                                         </a-list-item-meta>
                                         <div><a-icon type="delete"  :style="{color: '#eb2f96'}"/></div>
                                     </a-list-item>
-                                    <div v-if="noticeloading && !busy" class="demo-loading-container">
+                                    <div v-if="noticeloading && !busy" class="loading-container">
                                         <a-spin />
                                     </div>
                                 </a-list>
@@ -44,46 +41,17 @@
                             <a-icon type="notification" :style="{ fontSize: '22px', color: '#08c',marginTop: '4px' }"/>
                         </a-badge>
                     </a-popover>
-<!--                    <a-dropdown>-->
-<!--                        <a-badge count="5">-->
-<!--                            <a-icon type="notification" :style="{ fontSize: '22px', color: '#08c',marginTop: '4px' }"/>-->
-<!--                        </a-badge>-->
-
-<!--                        <div slot="overlay">-->
-<!--                            <div-->
-<!--                                class="demo-infinite-container"-->
-<!--                                v-infinite-scroll="handleInfiniteOnLoad"-->
-<!--                                :infinite-scroll-disabled="busy"-->
-<!--                                :infinite-scroll-distance="10"-->
-<!--                            >-->
-<!--                                &lt;!&ndash; 通知列表 &ndash;&gt;-->
-<!--                                <a-list :dataSource="data">-->
-<!--                                    <a-list-item slot="renderItem" slot-scope="item">-->
-<!--                                        <a-list-item-meta :description="item.email">-->
-<!--                                            <a slot="title" :href="item.href">{{item.name.last}}</a>-->
-<!--                                            <a-avatar-->
-<!--                                                    slot="avatar"-->
-<!--                                                    src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"-->
-<!--                                            />-->
-<!--                                        </a-list-item-meta>-->
-<!--                                        <div><a-icon type="delete"  :style="{color: '#eb2f96'}"/></div>-->
-<!--                                    </a-list-item>-->
-<!--                                    <div v-if="noticeloading && !busy" class="demo-loading-container">-->
-<!--                                        <a-spin />-->
-<!--                                    </div>-->
-<!--                                </a-list>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </a-dropdown>-->
                     <a-divider type="vertical" :style="{ fontSize: '22px' }"/>
-                    <a-dropdown>
+                    <a-popover placement="bottom">
                         <a-icon type="setting" :style="{ fontSize: '22px', color: '#08c',marginTop: '4px' }"/>
-                        <a-menu slot="overlay" @click="onClick">
-                            <a-menu-item key="1">1st menu item</a-menu-item>
-                            <a-menu-item key="2">2nd menu item</a-menu-item>
-                            <a-menu-item key="3">3rd menu item</a-menu-item>
-                        </a-menu>
-                    </a-dropdown>
+                        <a-list itemLayout="horizontal" :dataSource="menudata" slot="content">
+                            <a-list-item slot="renderItem" slot-scope="item">
+                                <a-list-item-meta>
+                                    <a slot="title" >{{item.title}}</a>
+                                </a-list-item-meta>
+                            </a-list-item>
+                        </a-list>
+                    </a-popover>
                     <a-divider type="vertical" :style="{ fontSize: '22px', color: '#08c' }"/>
                     <a-tooltip placement="bottom" title="用户" :getPopupContainer="getPopupContainer">
                         <a-icon type="user" :style="{ fontSize: '22px', color: '#08c',marginTop: '4px' }"/>
@@ -97,7 +65,11 @@
             <a-row class="content-repo">
                 <a-col :span="15">
                     <div :style="{ background: '#fff', padding: '24px', minHeight: '380px' }">
-                        <a-input-search placeholder="输入企业名称" @search="onSearch" enterButton="搜索" size="large"/>
+                        <a-row type="flex" justify="space-around">
+                            <a-col :span="22">
+                                <a-input-search placeholder="输入企业名称" @search="onSearch" enterButton="搜索" size="large"/>
+                            </a-col>
+                        </a-row>
                         <br/>
                         <br/>
                         <a-row type="flex" justify="space-around">
@@ -160,7 +132,7 @@
                         </a-select>
                         <a-divider orientation="left">附件列表</a-divider>
                         <div class="files">
-                            <div class="files-add">
+                            <div class="files-menu">
                                 <a-tooltip placement="top" title="上传附件" :getPopupContainer="getPopupContainer">
                                     <a-icon type="plus-square" :style="{ fontSize: '22px', color: '#08c',marginTop: '4px',marginLeft: '4px' }" @click="() => setModal1Visible(true)"/>
                                 </a-tooltip>
@@ -168,7 +140,7 @@
                                     <a-icon type="minus-square" :style="{ fontSize: '22px', color: '#08c',marginTop: '4px',marginLeft: '4px' }" />
                                 </a-tooltip>
                             </div>
-                            <a-list class="demo-loadmore-list" itemLayout="horizontal" :dataSource="filedata">
+                            <a-list class="loadmore-list" itemLayout="horizontal" :dataSource="filedata">
                                 <a-list-item slot="renderItem" slot-scope="item">
                                     <a slot="actions">edit</a>
                                     <a slot="actions">more</a>
@@ -186,31 +158,98 @@
                             </a-list>
                         </div>
                         <a-divider orientation="left">维护记录</a-divider>
-                        <div class="timeline">
-                            <div class="timeline-add">
-                                <a-tooltip placement="top" title="新增备注" :getPopupContainer="getPopupContainer">
-                                    <a-icon type="plus-square" :style="{ fontSize: '22px', color: '#08c',marginTop: '4px',marginLeft: '4px' }" @click="() => setModal1Visible(true)"/>
-                                </a-tooltip>
-                                <a-modal
-                                        title="备注"
-                                        style="top: 20px;"
-                                        :visible="modal1Visible"
-                                        class="ant-modal-body"
-                                        @cancel="() => setModal1Visible(false)"
-                                >
-                                <a-textarea :rows="4" @change="handleChange" :value="value"></a-textarea>
-                                    <a-upload-dragger
-                                            name="file"
-                                            :multiple="true"
-                                            action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                                            @change="handleChange"
+                        <div class="timeline-menu">
+
+                                <div class="timeline-add">
+                                    <a-tooltip placement="top" title="新增备注" :getPopupContainer="getPopupContainer">
+                                        <a-icon type="plus-square" :style="{ fontSize: '22px', color: '#08c',marginTop: '4px',marginLeft: '4px' }" @click="() => setModal1Visible(true)"/>
+                                    </a-tooltip>
+                                    <a-modal
+                                            title="备注"
+                                            style="top: 20px;"
+                                            :visible="modal1Visible"
+                                            class="ant-modal-body"
+                                            @cancel="() => setModal1Visible(false)"
                                     >
+                                        <a-textarea :rows="4" @change="handleChange" :value="value"></a-textarea>
+                                        <a-upload-dragger
+                                                name="file"
+                                                :multiple="true"
+                                                action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                                                @change="handleChange"
+                                        >
                                         <span class="ant-upload-text">
                                             <a-icon type="cloud-upload" :style="{fontSize: '15px'}"/>点击或拖拽此区域上传附件,支持批量文件上传,不限格式与大小
                                         </span>
-                                    </a-upload-dragger>
-                                </a-modal>
+                                        </a-upload-dragger>
+                                    </a-modal>
+                                </div>
+
+                            <!-- 维护记录时间轴 -->
+                            <div class="timeline">
+                                <a-timeline mode="alternate">
+                                    <a-timeline-item>
+                                        <a-row>
+                                            <a-col>Create a services site</a-col>
+                                        </a-row>
+                                        <a-row>
+                                            <a-col>2015-09-01</a-col>
+                                        </a-row>
+                                    </a-timeline-item>
+                                    <a-timeline-item color="green">
+                                        <a-row>
+                                            <a-col>Solve initial network problems</a-col>
+                                        </a-row>
+                                        <a-row>
+                                            <a-col>2015-09-01</a-col>
+                                        </a-row>
+                                    </a-timeline-item>
+                                    <a-timeline-item>
+                                        <a-icon slot="dot" type="clock-circle-o" style="font-size: 16px;" />
+                                        <a-row>
+                                            <a-col>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
+                                                laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto
+                                                beatae vitae dicta sunt explicabo.
+                                            </a-col>
+                                        </a-row>
+                                        <a-row>
+                                            <a-col>2015-09-01</a-col>
+                                        </a-row>
+                                    </a-timeline-item>
+                                    <a-timeline-item color="red">
+                                        <a-row>
+                                            <a-col>
+                                                Network problems being solved
+                                            </a-col>
+                                        </a-row>
+                                        <a-row>
+                                            <a-col>2015-09-01</a-col>
+                                        </a-row>
+                                    </a-timeline-item>
+                                    <a-timeline-item>
+                                        <a-row>
+                                            <a-col>
+                                                Create a services site
+                                            </a-col>
+                                        </a-row>
+                                        <a-row>
+                                            <a-col>2015-09-01</a-col>
+                                        </a-row>
+                                    </a-timeline-item>
+                                    <a-timeline-item>
+                                        <a-icon slot="dot" type="clock-circle-o" style="font-size: 16px;" />
+                                        <a-row>
+                                            <a-col>
+                                                Technical testing
+                                            </a-col>
+                                        </a-row>
+                                        <a-row>
+                                            <a-col>2015-09-01</a-col>
+                                        </a-row>
+                                    </a-timeline-item>
+                                </a-timeline>
                             </div>
+
                         </div>
                     </div>
                 </a-col>
@@ -238,24 +277,30 @@
         /*background-color: #42b983;*/
         border-radius: 4px;
     }
-    .files-add {
+    .files-menu {
         height: 30px;
         width: 100%;
         background-color: rgba(240,242,245,1);;
-        border-top-left-radius: 4px;
-        border-top-right-radius: 4px;
+        border-radius: 4px;
     }
-    .timeline{
-        height: 500px;
+    .timeline-menu{
+        height: 430px;
         /*background-color: #42b983;*/
         border-radius: 4px;
+        position: relative;
+    }
+    .timeline{
+        /*border: 1px solid #e8e8e8;*/
+        border-radius: 4px;
+        overflow: auto;
+        padding: 8px 10px;
+        height: 400px;
     }
     .timeline-add{
         height: 30px;
         width: 100%;
         background-color: rgba(240,242,245,1);;
-        border-top-left-radius: 4px;
-        border-top-right-radius: 4px;
+        border-radius: 4px;
     }
     .ant-select-selection{
         border-style: none;
@@ -271,8 +316,8 @@
         padding-bottom: 30px;
     }
 
-    .demo-infinite-container {
-        border: 1px solid #e8e8e8;
+    .infinite-container {
+        /*border: 1px solid #e8e8e8;*/
         border-radius: 4px;
         overflow: auto;
         padding: 8px 10px;
@@ -280,12 +325,13 @@
         background-color: #fff;
 
     }
-    .demo-loading-container {
+    .loading-container {
         position: absolute;
         bottom: 40px;
         width: 100%;
         text-align: center;
     }
+
 </style>
 
 <script>
@@ -310,6 +356,21 @@
                 data: [],
                 noticeloading: false,
                 busy: false,
+                //设置
+                menudata: [
+                    {
+                        title: 'Ant Design Title 1',
+                    },
+                    {
+                        title: 'Ant Design Title 2',
+                    },
+                    {
+                        title: 'Ant Design Title 3',
+                    },
+                    {
+                        title: 'Ant Design Title 4',
+                    },
+                ],
             };
         },
         beforeMount() {
