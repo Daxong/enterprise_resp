@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import App from './App.vue'
 import {
-    Anchor,
+    Affix,
+    Anchor, Avatar,
     Badge,
     Button,
     Card,
@@ -32,6 +33,8 @@ Vue.use(Badge);
 Vue.use(Dropdown);
 Vue.use(Timeline);
 Vue.use(Anchor);
+Vue.use(Avatar);
+Vue.use(Affix);
 
 
 Vue.config.productionTip = false
