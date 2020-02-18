@@ -66,11 +66,13 @@
         <a-layout-content :style="{ padding: '0 50px', marginTop: '64px' }">
           <!-- 中间部分 -->
 <!--          <index></index>-->
-          <cpy-detail></cpy-detail>
+<!--          <cpy-detail></cpy-detail>-->
+
         </a-layout-content>
         <a-layout-footer style="text-align: center">
           Enterprise repository ©2020 Created by Enlighten.com
         </a-layout-footer>
+        <router-view></router-view>
       </a-layout>
     </a-locale-provider>
   </div>
@@ -84,7 +86,7 @@ import 'moment/locale/zh-cn';
 //通知伪消息
 import reqwest from 'reqwest';
 import infiniteScroll from 'vue-infinite-scroll';
-import CpyDetail from "@/components/CpyDetail";
+// import CpyDetail from "@/components/CpyDetail";
 const fakeDataUrl = 'https://randomuser.me/api/?results=5&inc=name,gender,email,nat&noinfo';
 
 moment.locale('zh-cn');
@@ -121,7 +123,7 @@ export default {
     };
   },
   components: {
-    CpyDetail
+    // CpyDetail
     // index
   },
   beforeMount() {

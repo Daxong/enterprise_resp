@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
+// import Router from 'vue-router'
+import router from '@/router';
 import {
     Affix,
     Anchor, Avatar,
@@ -36,10 +38,23 @@ Vue.use(Anchor);
 Vue.use(Avatar);
 Vue.use(Affix);
 Vue.use(Table);
+// Vue.use(Router);
 
 
 Vue.config.productionTip = false
 
+// new Vue({
+//   render: h => h(App),
+//     router,
+// }).$mount('#app')
+
 new Vue({
-  render: h => h(App),
+    el: '#app',
+    router: router,
+    template: '<App/>',
+    components: {
+        App
+    },
+    render: h => h(App),
 }).$mount('#app')
+
