@@ -71,6 +71,10 @@
                             </a-col>
                         </a-row>
                     </a-affix>
+                    <div id="routerTemp">
+                        <BaseInfo></BaseInfo>
+                    </div>
+                    <router-view></router-view>
 
                 </div>
             </a-col>
@@ -88,8 +92,10 @@
 </template>
 
 <script>
+    import BaseInfo from "@/components/submenu/BaseInfo";
     export default {
         name: "CpyDetail",
+        components: {BaseInfo},
         data() {
             return{
                 top: 64,

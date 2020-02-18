@@ -8,7 +8,7 @@ import {
     Card,
     Col, Comment, Divider, Dropdown,
     Icon, Input, Layout, List, LocaleProvider,
-    Menu, Modal, Popover, Row, Select, Timeline, Tooltip, Upload
+    Menu, Modal, Popover, Row, Select, Table, Timeline, Tooltip, Upload
 } from 'ant-design-vue';
 import TextArea from "ant-design-vue/lib/input/TextArea";
 Vue.use(Layout);
@@ -35,6 +35,7 @@ Vue.use(Timeline);
 Vue.use(Anchor);
 Vue.use(Avatar);
 Vue.use(Affix);
+Vue.use(Table);
 
 
 Vue.config.productionTip = false
