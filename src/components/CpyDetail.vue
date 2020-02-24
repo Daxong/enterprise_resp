@@ -71,31 +71,22 @@
                             </a-col>
                         </a-row>
                     </a-affix>
-                    <div id="routerTemp">
-                        <BaseInfo></BaseInfo>
-                    </div>
+                    <!-- 路由 -->
                     <router-view></router-view>
 
                 </div>
-            </a-col>
-        </a-row>
-
-        <a-row type="flex" justify="space-around">
-            <a-col :span="22">新闻模块</a-col>
-        </a-row>
-
-        <a-row type="flex" justify="space-around">
-            <a-col :span="22">子栏目模块 就是很多菜单栏的那个
             </a-col>
         </a-row>
     </div>
 </template>
 
 <script>
-    import BaseInfo from "@/components/submenu/BaseInfo";
+    // import BaseInfo from "@/components/submenu/BaseInfo";
     export default {
         name: "CpyDetail",
-        components: {BaseInfo},
+        components: {
+            // BaseInfo
+        },
         data() {
             return{
                 top: 64,

@@ -67,12 +67,11 @@
           <!-- 中间部分 -->
 <!--          <index></index>-->
 <!--          <cpy-detail></cpy-detail>-->
-
+          <router-view></router-view>
         </a-layout-content>
         <a-layout-footer style="text-align: center">
           Enterprise repository ©2020 Created by Enlighten.com
         </a-layout-footer>
-        <router-view></router-view>
       </a-layout>
     </a-locale-provider>
   </div>

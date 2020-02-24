@@ -2,18 +2,34 @@ import Vue from 'vue';
 import Router from 'vue-router';
 
 import index from '@/components/Index';
+import cpyDetail from '@/components/CpyDetail';
+import baseinfo from '@/components/submenu/BaseInfo';
+import listInfo from '@/components/submenu/ListInfo';
 Vue.use(Router);
 
-// const login = () => import(/* webpackChunkName: "index" */ '@/components/Index');
-// const Home = { template: '<div>This is Home</div>' }
 export default new Router({
     mode:'history',
     routes: [
         {
-            path: '/home',
-            name: 'jia',
+            path: '/',
+            name: '客商库',
             component: index,
         },
+        {
+            path: '/detail',
+            name: "企业详情",
+            component: cpyDetail,
+            children: [
+                {
+                    path: '/',
+                    component: baseinfo,
+                },
+                {
+                    path: 'listinfo',
+                    component: listInfo
+                }
+            ]
+        }
     //     {
     //         path: '/manage',
     //         component: manage,
